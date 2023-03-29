@@ -7,8 +7,8 @@ import telebot
 import openai
 
 # Set your API keys and tokens
-TELEGRAM_API_TOKEN = '6172217541:AAGWtnETeiQnXOuPq11MrfdVf-x7UY47iqo'
-openai.api_key = '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'
+TELEGRAM_API_TOKEN = ''
+openai.api_key = ''
 GOOGLE_APPLICATION_CREDENTIALS = 'C:/Users/yaroslav/Downloads/web3advertisement-94ba21675884.json'
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS
@@ -35,14 +35,14 @@ def transcribe_voice(voice):
 
 def get_gpt_response(text):
     
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=text,
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role":"user", "content": text}],
         temperature=0.6,
     )
     
     
-    return response['choices'][0]['text'].strip()
+    return response["choices"][0]["message"]["content"].strip()
 
 
 def synthesize_speech(text):
